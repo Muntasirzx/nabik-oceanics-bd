@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nabik Oceanics BD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ocean: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        deep: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(12, 74, 110, 0.7), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1559136555-930b7dd085bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-anchor text-ocean-800 text-3xl mr-3"></i>
+                    <span class="font-bold text-2xl tracking-tight text-deep">Nabik Oceanics BD</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-slate-600 hover:text-ocean-800 font-medium transition">Home</a>
+                    <a href="#about" class="text-slate-600 hover:text-ocean-800 font-medium transition">About</a>
+                    <a href="#services" class="text-slate-600 hover:text-ocean-800 font-medium transition">Services</a>
+                    <a href="#contact" class="px-5 py-2.5 bg-ocean-800 text-white rounded-full font-medium hover:bg-ocean-900 transition shadow-lg shadow-ocean-800/20">Contact Us</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-slate-600 hover:text-ocean-800">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-slate-600 hover:text-ocean-800 font-medium">Home</a>
+                <a href="#services" class="block px-3 py-2 text-slate-600 hover:text-ocean-800 font-medium">Services</a>
+                <a href="#contact" class="block px-3 py-2 text-ocean-800 font-bold">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg h-screen flex items-center justify-center text-center px-4">
+        <div class="max-w-4xl mx-auto text-white" style="margin-top: 50px;">
+            <div class="inline-block mb-4 px-4 py-1.5 rounded-full bg-ocean-500/20 border border-ocean-400/30 backdrop-blur-sm">
+                <span class="text-ocean-100 text-sm font-semibold tracking-wide uppercase">Premier Maritime Solutions</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                Navigating the Future of <br>
+                <span class="text-ocean-500">Maritime Bangladesh</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-200 mb-10 max-w-2xl mx-auto font-light">
+                Providing world-class oceanic logistics, vessel management, and marine engineering solutions from the Bay of Bengal to the world.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#services" class="px-8 py-4 bg-ocean-600 hover:bg-ocean-700 text-white rounded-full font-bold text-lg transition shadow-xl shadow-ocean-900/50">
+                    Explore Services
+                </a>
+                <a href="#contact" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-full font-bold text-lg backdrop-blur-sm transition">
+                    Get a Quote
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-10 bg-ocean-50 border-b border-ocean-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-4xl font-bold text-ocean-800 mb-1">10+</div>
+                    <div class="text-sm text-slate-500 uppercase tracking-wide">Years Experience</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-ocean-800 mb-1">500+</div>
+                    <div class="text-sm text-slate-500 uppercase tracking-wide">Voyages Completed</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-ocean-800 mb-1">Chittagong</div>
+                    <div class="text-sm text-slate-500 uppercase tracking-wide">Main Hub</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-ocean-800 mb-1">24/7</div>
+                    <div class="text-sm text-slate-500 uppercase tracking-wide">Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-deep mb-4">Our Core Capabilities</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">We deliver integrated maritime strategies designed for efficiency, safety, and sustainability.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="p-8 rounded-2xl bg-white border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-ocean-500/10 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-ocean-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-ocean-600 transition-colors">
+                        <i class="fa-solid fa-ship text-2xl text-ocean-600 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-deep mb-3">Vessel Management</h3>
+                    <p class="text-slate-600 leading-relaxed">Complete technical management and crew handling for commercial vessels operating in international waters.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="p-8 rounded-2xl bg-white border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-ocean-500/10 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-ocean-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-ocean-600 transition-colors">
+                        <i class="fa-solid fa-boxes-stacked text-2xl text-ocean-600 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-deep mb-3">Port Logistics</h3>
+                    <p class="text-slate-600 leading-relaxed">Streamlined cargo handling, customs clearance, and supply chain solutions at Chittagong and Mongla ports.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="p-8 rounded-2xl bg-white border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-ocean-500/10 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-ocean-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-ocean-600 transition-colors">
+                        <i class="fa-solid fa-compass text-2xl text-ocean-600 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-deep mb-3">Marine Engineering</h3>
+                    <p class="text-slate-600 leading-relaxed">Expert consultancy, repair coordination, and engineering support for maintaining fleet seaworthiness.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-deep text-slate-300 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fa-solid fa-anchor text-ocean-500 text-2xl mr-3"></i>
+                        <span class="font-bold text-xl text-white">Nabik Oceanics BD</span>
+                    </div>
+                    <p class="mb-6 max-w-sm">Connecting Bangladesh to global trade routes with integrity and speed.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-ocean-600 transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-ocean-600 transition"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-ocean-600 transition"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-white font-bold mb-4">Contact</h4>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-start"><i class="fa-solid fa-location-dot mt-1 mr-2 text-ocean-500"></i> Agrabad C/A, Chittagong, Bangladesh</li>
+                            <li class="flex items-center"><i class="fa-solid fa-envelope mr-2 text-ocean-500"></i> info@nabikoceanics.bd</li>
+                            <li class="flex items-center"><i class="fa-solid fa-phone mr-2 text-ocean-500"></i> +880 1XXX XXXXXX</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-4">Legal</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                            <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-slate-700 mt-12 pt-8 text-center text-sm">
+                <p>&copy; 2025 Nabik Oceanics BD. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
