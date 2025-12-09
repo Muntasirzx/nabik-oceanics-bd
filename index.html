@@ -84,13 +84,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div class="flex justify-between items-center">
                 <div class="flex items-center gap-3">
-                    <!-- LOGO UPDATED HERE -->
-                    <!-- Note: Use %20 for spaces in URLs to be safe, or rename file to nabik-logo.jpg -->
                     <img src="nabik-logo.jpg" alt="Nabik Logo" class="w-10 h-10 rounded-lg shadow-lg object-contain bg-white">
                     
                     <div>
                         <span id="nav-logo-text" class="text-xl font-bold tracking-tight block leading-none transition-colors duration-300">NABIK</span>
-                        <span class="text-[10px] font-bold text-ocean uppercase tracking-widest block">Technologies</span>
+                        <span class="text-[10px] font-bold text-ocean uppercase tracking-widest block">Oceanics</span>
                     </div>
                 </div>
                 
@@ -187,7 +185,6 @@
                         <img src="team-boat.png" class="object-cover w-full h-full group-hover:scale-105 transition duration-700">
                         <div class="absolute inset-0 bg-navy-900/20 group-hover:bg-navy-900/10 transition duration-500"></div>
                     </div>
-                    <!-- REMOVED: Logo Strip (BIG 2021, ICT, SAUVC) as requested -->
                 </div>
                 
                 <div class="reveal-right">
@@ -426,9 +423,10 @@
                         </div>
                     </div>
                     <div class="flex flex-wrap gap-4 opacity-70">
-                        <span class="font-bold border-r border-slate-600 pr-4">Prothom Alo</span>
-                        <span class="font-bold border-r border-slate-600 pr-4">Daily Star</span>
-                        <span class="font-bold">Dhaka Tribune</span>
+                        <!-- Updated Links for Newspapers -->
+                        <a href="https://www.youtube.com/watch?v=qBWtcgIuvng" target="_blank" class="font-bold border-r border-slate-600 pr-4 hover:text-ocean transition">Prothom Alo</a>
+                        <a href="https://www.thedailystar.net/tech-startup/news/bracu-students-develop-nabik-robot-flood-relief-3689561" target="_blank" class="font-bold border-r border-slate-600 pr-4 hover:text-ocean transition">Daily Star</a>
+                        <a href="https://www.dhakatribune.com/bangladesh/356909/rover-%E2%80%98nabik%E2%80%99-prepares-for-second-deployment-in" target="_blank" class="font-bold hover:text-ocean transition">Dhaka Tribune</a>
                     </div>
                 </div>
                 <div class="reveal-right relative">
@@ -439,30 +437,51 @@
         </div>
     </section>
 
+    <!-- Video Section (New) -->
+    <section class="py-16 bg-navy-950 border-b border-navy-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8 reveal">
+                <h3 class="text-2xl font-bold text-white uppercase tracking-widest">Mission Footage</h3>
+                <p class="text-slate-400 mt-2 text-sm">Live operation during the Feni Floods 2024</p>
+            </div>
+            <div class="reveal relative w-full max-w-4xl mx-auto aspect-video rounded-2xl overflow-hidden shadow-2xl border border-navy-800">
+                <iframe 
+                    class="w-full h-full" 
+                    src="https://www.youtube.com/embed/qBWtcgIuvng" 
+                    title="Nabik Flood Relief Mission" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="py-24 bg-navy-950 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
             <h2 class="text-3xl font-bold mb-8">Secure Your Waterways</h2>
             <div class="bg-navy-900 p-8 rounded-3xl max-w-4xl mx-auto shadow-2xl border border-navy-800">
-                <form class="grid md:grid-cols-2 gap-6 text-left">
+                <!-- Updated Contact Form with Mailto -->
+                <form action="mailto:muntasirbdllh@gmail.com" method="post" enctype="text/plain" class="grid md:grid-cols-2 gap-6 text-left">
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Name</label>
-                        <input type="text" class="w-full bg-navy-950 border border-navy-700 rounded-lg px-4 py-3 focus:outline-none focus:border-ocean transition text-white">
+                        <input type="text" name="name" class="w-full bg-navy-950 border border-navy-700 rounded-lg px-4 py-3 focus:outline-none focus:border-ocean transition text-white">
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Email</label>
-                        <input type="email" class="w-full bg-navy-950 border border-navy-700 rounded-lg px-4 py-3 focus:outline-none focus:border-ocean transition text-white">
+                        <input type="email" name="email" class="w-full bg-navy-950 border border-navy-700 rounded-lg px-4 py-3 focus:outline-none focus:border-ocean transition text-white">
                     </div>
                     <div class="md:col-span-2">
                         <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Inquiry Type</label>
-                        <select class="w-full bg-navy-950 border border-navy-700 rounded-lg px-4 py-3 focus:outline-none focus:border-ocean transition text-white">
+                        <select name="inquiry_type" class="w-full bg-navy-950 border border-navy-700 rounded-lg px-4 py-3 focus:outline-none focus:border-ocean transition text-white">
                             <option>Purchase / Deployment</option>
                             <option>Service Request</option>
                             <option>Partnership</option>
                         </select>
                     </div>
                     <div class="md:col-span-2 text-center">
-                        <button class="px-10 py-4 bg-ocean text-white font-bold rounded-full hover:bg-sky-500 transition shadow-lg shadow-ocean/20 w-full md:w-auto">
+                        <button type="submit" class="px-10 py-4 bg-ocean text-white font-bold rounded-full hover:bg-sky-500 transition shadow-lg shadow-ocean/20 w-full md:w-auto">
                             Submit Request
                         </button>
                     </div>
