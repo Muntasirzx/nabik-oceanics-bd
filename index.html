@@ -1,196 +1,564 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nabik Oceanics BD</title>
+    <title>NABIK | Autonomous Surface Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
                     colors: {
-                        ocean: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#0ea5e9',
-                            800: '#075985',
-                            900: '#0c4a6e',
+                        navy: {
+                            50: '#f0f4fa',
+                            100: '#dbeafe',
+                            600: '#2563eb',
+                            800: '#1e40af',
+                            900: '#0f172a',
+                            950: '#020617',
                         },
-                        deep: '#0f172a'
+                        ocean: {
+                            light: '#38bdf8',
+                            DEFAULT: '#0ea5e9',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(15, 23, 42, 0.1)',
+                        'glow': '0 0 20px rgba(56, 189, 248, 0.3)',
                     }
                 }
             }
         }
     </script>
     <style>
-        .hero-bg {
-            background-image: linear-gradient(rgba(12, 74, 110, 0.7), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1559136555-930b7dd085bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
+        /* --- Scroll Transitions --- */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal-left { opacity: 0; transform: translateX(-50px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal-right { opacity: 0; transform: translateX(50px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0); }
+
+        /* --- Product Box Effect --- */
+        .product-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255,255,255, 0.8);
+        }
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.15);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+        .feature-icon-box { transition: all 0.3s ease; }
+        .product-card:hover .feature-icon-box {
+            background-color: #e0f2fe; color: #0284c7; transform: scale(1.05);
+        }
+        
+        /* Hero Gradient Overlay */
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.7) 50%, rgba(15, 23, 42, 0.4) 100%);
+        }
+
+        /* Nav Transition Classes */
+        .nav-scrolled {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+        }
+        .nav-transparent {
+            background-color: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
-<body class="font-sans text-slate-800 antialiased">
+<body class="font-sans text-slate-600 antialiased bg-navy-50">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex items-center">
-                    <i class="fa-solid fa-anchor text-ocean-800 text-3xl mr-3"></i>
-                    <span class="font-bold text-2xl tracking-tight text-deep">Nabik Oceanics BD</span>
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 nav-transparent h-20 flex items-center text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div id="nav-logo-bg" class="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center text-white shadow-lg transition-colors duration-300">
+                        <i class="fa-solid fa-anchor text-xl"></i>
+                    </div>
+                    <div>
+                        <span id="nav-logo-text" class="text-xl font-bold tracking-tight block leading-none transition-colors duration-300">NABIK</span>
+                        <span class="text-[10px] font-bold text-ocean uppercase tracking-widest block">Technologies</span>
+                    </div>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="text-slate-600 hover:text-ocean-800 font-medium transition">Home</a>
-                    <a href="#about" class="text-slate-600 hover:text-ocean-800 font-medium transition">About</a>
-                    <a href="#services" class="text-slate-600 hover:text-ocean-800 font-medium transition">Services</a>
-                    <a href="#contact" class="px-5 py-2.5 bg-ocean-800 text-white rounded-full font-medium hover:bg-ocean-900 transition shadow-lg shadow-ocean-800/20">Contact Us</a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="nav-link text-sm font-semibold hover:text-ocean transition duration-300 opacity-90 hover:opacity-100">Mission</a>
+                    <a href="#fleet" class="nav-link text-sm font-semibold hover:text-ocean transition duration-300 opacity-90 hover:opacity-100">USV Fleet</a>
+                    <a href="#services" class="nav-link text-sm font-semibold hover:text-ocean transition duration-300 opacity-90 hover:opacity-100">Operations</a>
+                    <a href="#news" class="nav-link text-sm font-semibold hover:text-ocean transition duration-300 opacity-90 hover:opacity-100">News</a>
+                    <a href="#contact" id="nav-btn" class="px-6 py-2.5 bg-white text-navy-900 text-sm font-bold rounded-full hover:bg-ocean hover:text-white transition shadow-lg transform hover:-translate-y-0.5">
+                        Contact Us
+                    </a>
                 </div>
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-slate-600 hover:text-ocean-800">
+                 <div class="md:hidden">
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="nav-link-mobile text-white">
                         <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#home" class="block px-3 py-2 text-slate-600 hover:text-ocean-800 font-medium">Home</a>
-                <a href="#services" class="block px-3 py-2 text-slate-600 hover:text-ocean-800 font-medium">Services</a>
-                <a href="#contact" class="block px-3 py-2 text-ocean-800 font-bold">Contact Us</a>
+        <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-0 w-full bg-white border-t border-slate-100 shadow-xl text-slate-800">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#about" class="block py-3 font-semibold border-b border-slate-50">Mission</a>
+                <a href="#fleet" class="block py-3 font-semibold border-b border-slate-50">USV Fleet</a>
+                <a href="#services" class="block py-3 font-semibold border-b border-slate-50">Operations</a>
+                <a href="#contact" class="block py-3 font-bold text-navy-600">Contact Us</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-bg h-screen flex items-center justify-center text-center px-4">
-        <div class="max-w-4xl mx-auto text-white" style="margin-top: 50px;">
-            <div class="inline-block mb-4 px-4 py-1.5 rounded-full bg-ocean-500/20 border border-ocean-400/30 backdrop-blur-sm">
-                <span class="text-ocean-100 text-sm font-semibold tracking-wide uppercase">Premier Maritime Solutions</span>
-            </div>
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                Navigating the Future of <br>
-                <span class="text-ocean-500">Maritime Bangladesh</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-slate-200 mb-10 max-w-2xl mx-auto font-light">
-                Providing world-class oceanic logistics, vessel management, and marine engineering solutions from the Bay of Bengal to the world.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#services" class="px-8 py-4 bg-ocean-600 hover:bg-ocean-700 text-white rounded-full font-bold text-lg transition shadow-xl shadow-ocean-900/50">
-                    Explore Services
-                </a>
-                <a href="#contact" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-full font-bold text-lg backdrop-blur-sm transition">
-                    Get a Quote
-                </a>
+    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- Dynamic Stormy Background -->
+        <div class="absolute inset-0 z-0">
+             <!-- CORRECTED: .jpeg extension -->
+            <img src="stormy-bg.jpeg" alt="Stormy Sea" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal active text-white">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8">
+                        <span class="w-2 h-2 rounded-full bg-ocean-light animate-pulse"></span>
+                        <span class="text-xs font-bold tracking-wide uppercase">Autonomous Surface Vehicles</span>
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6 tracking-tight">
+                        Always On Watch, <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-ocean-light to-white">Always On Course.</span>
+                    </h1>
+                    <p class="text-lg text-slate-300 mb-10 max-w-xl leading-relaxed">
+                        We engineer Unmanned Surface Vehicles (USVs) for Bangladesh's toughest waters. From surveillance to flood relief, our machines operate where humans cannot.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#fleet" class="px-8 py-4 bg-white text-navy-900 rounded-full font-bold hover:bg-ocean-light transition shadow-lg shadow-white/10 flex items-center gap-2 group">
+                            Meet The USV
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#contact" class="px-8 py-4 border border-white/30 text-white rounded-full font-bold hover:bg-white/10 transition backdrop-blur-sm">
+                            Deploy With Us
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="reveal-right relative hidden lg:block">
+                    <!-- Floating USV Concept -->
+                    <div class="relative z-10 animate-[float_6s_ease-in-out_infinite]">
+                        <!-- Using Nabik 2.0 as Hero Image -->
+                        <img src="nabik-2.jpg" alt="Nabik USV" class="rounded-2xl shadow-2xl shadow-navy-900/50 border border-white/10">
+                        
+                        <div class="absolute -bottom-10 -left-10 bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-2xl shadow-xl">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
+                                    <i class="fa-solid fa-location-dot text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-white">Feni</div>
+                                    <div class="text-xs text-slate-300 uppercase tracking-wider">Recent Deployment</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="py-10 bg-ocean-50 border-b border-ocean-100">
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div>
-                    <div class="text-4xl font-bold text-ocean-800 mb-1">10+</div>
-                    <div class="text-sm text-slate-500 uppercase tracking-wide">Years Experience</div>
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal-left relative">
+                    <div class="aspect-video rounded-2xl overflow-hidden shadow-2xl relative group">
+                        <!-- CORRECTED: Local File -->
+                        <img src="team-boat.jpg" class="object-cover w-full h-full group-hover:scale-105 transition duration-700">
+                        <div class="absolute inset-0 bg-navy-900/20 group-hover:bg-navy-900/10 transition duration-500"></div>
+                    </div>
+                    <!-- REMOVED: Logo Strip (BIG 2021, ICT, SAUVC) as requested -->
                 </div>
-                <div>
-                    <div class="text-4xl font-bold text-ocean-800 mb-1">500+</div>
-                    <div class="text-sm text-slate-500 uppercase tracking-wide">Voyages Completed</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold text-ocean-800 mb-1">Chittagong</div>
-                    <div class="text-sm text-slate-500 uppercase tracking-wide">Main Hub</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold text-ocean-800 mb-1">24/7</div>
-                    <div class="text-sm text-slate-500 uppercase tracking-wide">Support</div>
+                
+                <div class="reveal-right">
+                    <h2 class="text-sm font-bold text-ocean uppercase tracking-widest mb-2">Tracking The Ocean</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-navy-900 mb-6 leading-tight">Born in Bangladesh <br>Built for Resilience</h3>
+                    <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                        We are Nabik. Born from a shared passion for robotics, we are pioneering <strong>Unmanned Surface Vehicles (USVs)</strong> to secure our borders and protect our people.
+                    </p>
+                    <p class="text-slate-600 mb-8 leading-relaxed">
+                        Unlike traditional vessels, our autonomous systems use sustainable <strong>Jute Fiber Hulls</strong> and electric jet propulsion to navigate shallow riverines and floodwaters where others fail.
+                    </p>
+                    <a href="#fleet" class="text-navy-900 font-bold border-b-2 border-ocean hover:text-ocean transition pb-1 inline-flex items-center gap-2 group">
+                        See The Tech <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- MEET OUR FLEET (USV Focused) -->
+    <section id="fleet" class="py-24 bg-navy-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-navy-900 mb-4">Meet The Fleet</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Tactical surface units designed for surveillance, logistics, and rapid response.</p>
+            </div>
+
+            <!-- Updated Grid to 4 Columns for the new fleet lineup -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Card 1: Nabik 1.0 -->
+                <div class="reveal-left product-card bg-white rounded-3xl p-6 shadow-soft relative overflow-hidden group h-full flex flex-col">
+                    <div class="absolute top-0 right-0 bg-slate-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl z-10">STANDARD</div>
+                    
+                    <div class="h-40 flex items-center justify-center mb-6 relative">
+                        <div class="absolute inset-0 bg-blue-50/50 rounded-2xl -z-10 group-hover:scale-105 transition duration-500"></div>
+                        <!-- CORRECTED: Local File -->
+                        <img src="nabik-1.jpg" alt="Nabik 1.0" class="h-full object-contain drop-shadow-xl group-hover:scale-110 transition duration-500">
+                    </div>
+
+                    <div class="flex justify-between items-end mb-4 border-b border-slate-100 pb-3">
+                        <div>
+                            <h3 class="text-xl font-bold text-navy-900">Nabik 1.0</h3>
+                            <p class="text-xs text-slate-500">Multi-Purpose USV</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 mt-auto">
+                        <div class="feature-icon-box flex flex-col items-center justify-center p-2 rounded-lg bg-slate-50 text-slate-600">
+                            <i class="fa-solid fa-box text-sm mb-1"></i>
+                            <span class="text-[8px] font-bold uppercase text-center">Logistics</span>
+                        </div>
+                        <div class="feature-icon-box flex flex-col items-center justify-center p-2 rounded-lg bg-slate-50 text-slate-600">
+                            <i class="fa-solid fa-eye text-sm mb-1"></i>
+                            <span class="text-[8px] font-bold uppercase text-center">Surveillance</span>
+                        </div>
+                        <div class="feature-icon-box flex flex-col items-center justify-center p-2 rounded-lg bg-slate-50 text-slate-600">
+                            <i class="fa-solid fa-life-ring text-sm mb-1"></i>
+                            <span class="text-[8px] font-bold uppercase text-center">Rescue</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Nabik 2.0 -->
+                <div class="reveal product-card bg-white rounded-3xl p-6 shadow-soft relative overflow-hidden group h-full flex flex-col delay-75">
+                    <div class="absolute top-0 right-0 bg-ocean text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl z-10">ADVANCED</div>
+                    
+                    <div class="h-40 flex items-center justify-center mb-6 relative">
+                        <div class="absolute inset-0 bg-blue-50/50 rounded-2xl -z-10 group-hover:scale-105 transition duration-500"></div>
+                        <!-- CORRECTED: Local File -->
+                        <img src="nabik-2.jpg" alt="Nabik 2.0" class="h-full object-contain drop-shadow-xl group-hover:scale-110 transition duration-500">
+                    </div>
+
+                    <div class="flex justify-between items-end mb-4 border-b border-slate-100 pb-3">
+                        <div>
+                            <h3 class="text-xl font-bold text-navy-900">Nabik 2.0</h3>
+                            <p class="text-xs text-slate-500">Research & Logistics</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 mt-auto">
+                        <div class="feature-icon-box flex flex-col items-center justify-center p-2 rounded-lg bg-slate-50 text-slate-600">
+                            <i class="fa-solid fa-flask text-sm mb-1"></i>
+                            <span class="text-[8px] font-bold uppercase text-center">Research</span>
+                        </div>
+                        <div class="feature-icon-box flex flex-col items-center justify-center p-2 rounded-lg bg-slate-50 text-slate-600">
+                            <i class="fa-solid fa-truck-fast text-sm mb-1"></i>
+                            <span class="text-[8px] font-bold uppercase text-center">Logistics</span>
+                        </div>
+                        <div class="feature-icon-box flex flex-col items-center justify-center p-2 rounded-lg bg-slate-50 text-slate-600">
+                            <i class="fa-solid fa-microchip text-sm mb-1"></i>
+                            <span class="text-[8px] font-bold uppercase text-center">Tech+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Nabik Iron Fleet -->
+                <div class="reveal product-card bg-white rounded-3xl p-6 shadow-soft relative overflow-hidden group h-full flex flex-col delay-150">
+                    <div class="absolute top-0 right-0 bg-navy-900 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl z-10">MILITARY</div>
+                    
+                    <div class="h-40 flex items-center justify-center mb-6 relative">
+                        <div class="absolute inset-0 bg-blue-50/50 rounded-2xl -z-10 group-hover:scale-105 transition duration-500"></div>
+                        <!-- CORRECTED: Local File -->
+                        <img src="iron-fleet.jpg" alt="Iron Fleet" class="h-full object-cover rounded-lg drop-shadow-xl group-hover:scale-110 transition duration-500 grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100">
+                    </div>
+
+                    <div class="flex justify-between items-end mb-4 border-b border-slate-100 pb-3">
+                        <div>
+                            <h3 class="text-xl font-bold text-navy-900">Iron Fleet</h3>
+                            <p class="text-xs text-slate-500">Defense & Rescue</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 mt-auto">
+                        <div class="feature-icon-box flex flex-col items-center justify-center p-2 rounded-lg bg-slate-50 text-slate-600">
+                            <i class="fa-solid fa-shield-halved text-sm mb-1"></i>
+                            <span class="text-[8px] font-bold uppercase text-center">Military</span>
+                        </div>
+                        <div class="feature-icon-box flex flex-col items-center justify-center p-2 rounded-lg bg-slate-50 text-slate-600">
+                            <i class="fa-solid fa-binoculars text-sm mb-1"></i>
+                            <span class="text-[8px] font-bold uppercase text-center">Surveillance</span>
+                        </div>
+                        <div class="feature-icon-box flex flex-col items-center justify-center p-2 rounded-lg bg-slate-50 text-slate-600">
+                            <i class="fa-solid fa-life-ring text-sm mb-1"></i>
+                            <span class="text-[8px] font-bold uppercase text-center">Rescue</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Nabik OS -->
+                <div class="reveal-right product-card bg-white rounded-3xl p-6 shadow-soft group h-full flex flex-col delay-200">
+                     <div class="h-40 flex items-center justify-center mb-6 relative">
+                        <div class="absolute inset-0 bg-blue-50/50 rounded-2xl -z-10 group-hover:scale-105 transition duration-500"></div>
+                        <!-- CORRECTED: Local File (.jpeg) -->
+                        <img src="nabik-os.jpeg" alt="Software" class="h-full object-contain drop-shadow-xl group-hover:scale-110 transition duration-500 rounded-lg">
+                    </div>
+
+                    <div class="flex justify-between items-end mb-4 border-b border-slate-100 pb-3">
+                        <div>
+                            <h3 class="text-xl font-bold text-navy-900">Nabik OS</h3>
+                            <p class="text-xs text-slate-500">Mission Control</p>
+                        </div>
+                        <span class="text-ocean font-bold text-xs">v1.0</span>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 mt-auto">
+                        <div class="feature-icon-box flex flex-col items-center justify-center p-2 rounded-lg bg-slate-50 text-slate-600">
+                            <i class="fa-solid fa-location-crosshairs text-sm mb-1"></i>
+                            <span class="text-[8px] font-bold uppercase text-center">GPS Track</span>
+                        </div>
+                        <div class="feature-icon-box flex flex-col items-center justify-center p-2 rounded-lg bg-slate-50 text-slate-600">
+                            <i class="fa-solid fa-robot text-sm mb-1"></i>
+                            <span class="text-[8px] font-bold uppercase text-center">AI Pilot</span>
+                        </div>
+                        <div class="feature-icon-box flex flex-col items-center justify-center p-2 rounded-lg bg-slate-50 text-slate-600">
+                            <i class="fa-solid fa-video text-sm mb-1"></i>
+                            <span class="text-[8px] font-bold uppercase text-center">Live Feed</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services (Surface Focused) -->
     <section id="services" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-deep mb-4">Our Core Capabilities</h2>
-                <p class="text-slate-600 max-w-2xl mx-auto">We deliver integrated maritime strategies designed for efficiency, safety, and sustainability.</p>
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl font-bold text-navy-900 uppercase">Surface Operations</h2>
+                <p class="text-slate-500 mt-2">Replacing risky manned missions with autonomous precision.</p>
             </div>
-            
+
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="p-8 rounded-2xl bg-white border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-ocean-500/10 transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-ocean-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-ocean-600 transition-colors">
-                        <i class="fa-solid fa-ship text-2xl text-ocean-600 group-hover:text-white transition-colors"></i>
+                <!-- Service 1: Flood Response -->
+                <div class="reveal-left text-center group h-full">
+                    <div class="relative mb-6 rounded-2xl overflow-hidden shadow-lg border border-slate-100 hover:shadow-xl transition-all duration-300">
+                        <!-- CORRECTED: Local File -->
+                        <img src="flood-icon.jpg" class="w-full h-auto object-contain p-4 bg-slate-50 group-hover:scale-105 transition duration-500">
                     </div>
-                    <h3 class="text-xl font-bold text-deep mb-3">Vessel Management</h3>
-                    <p class="text-slate-600 leading-relaxed">Complete technical management and crew handling for commercial vessels operating in international waters.</p>
+                    <h3 class="text-xl font-bold text-navy-900 mb-2">Flood Response</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed px-4">
+                        Delivering aid to inaccessible areas. Our shallow-draft USVs navigate floodwaters where traditional boats cannot reach.
+                    </p>
                 </div>
 
-                <!-- Service 2 -->
-                <div class="p-8 rounded-2xl bg-white border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-ocean-500/10 transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-ocean-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-ocean-600 transition-colors">
-                        <i class="fa-solid fa-boxes-stacked text-2xl text-ocean-600 group-hover:text-white transition-colors"></i>
+                <!-- Service 2: Maritime Surveillance -->
+                <div class="reveal text-center group h-full delay-100">
+                    <div class="relative mb-6 rounded-2xl overflow-hidden shadow-lg border border-slate-100 hover:shadow-xl transition-all duration-300">
+                         <!-- CORRECTED: Local File -->
+                        <img src="surveillance-icon.jpg" class="w-full h-auto object-contain p-4 bg-slate-50 group-hover:scale-105 transition duration-500">
                     </div>
-                    <h3 class="text-xl font-bold text-deep mb-3">Port Logistics</h3>
-                    <p class="text-slate-600 leading-relaxed">Streamlined cargo handling, customs clearance, and supply chain solutions at Chittagong and Mongla ports.</p>
+                    <h3 class="text-xl font-bold text-navy-900 mb-2">Maritime Surveillance</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed px-4">
+                        24/7 autonomous monitoring of borders, ports, and critical infrastructure like oil rigs to detect unauthorized activity.
+                    </p>
                 </div>
 
-                <!-- Service 3 -->
-                <div class="p-8 rounded-2xl bg-white border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-ocean-500/10 transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-ocean-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-ocean-600 transition-colors">
-                        <i class="fa-solid fa-compass text-2xl text-ocean-600 group-hover:text-white transition-colors"></i>
+                <!-- Service 3: River Health -->
+                <div class="reveal-right text-center group h-full delay-200">
+                    <div class="relative mb-6 rounded-2xl overflow-hidden shadow-lg border border-slate-100 hover:shadow-xl transition-all duration-300">
+                         <!-- CORRECTED: Local File (.jpeg) -->
+                        <img src="river-icon.jpeg" class="w-full h-auto object-contain p-4 bg-slate-50 group-hover:scale-105 transition duration-500">
                     </div>
-                    <h3 class="text-xl font-bold text-deep mb-3">Marine Engineering</h3>
-                    <p class="text-slate-600 leading-relaxed">Expert consultancy, repair coordination, and engineering support for maintaining fleet seaworthiness.</p>
+                    <h3 class="text-xl font-bold text-navy-900 mb-2">River Health</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed px-4">
+                        Monitoring water quality, collecting samples, and mapping riverbeds (Bathymetry) to ensure environmental safety and compliance.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact" class="bg-deep text-slate-300 py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-12">
-                <div>
-                    <div class="flex items-center mb-6">
-                        <i class="fa-solid fa-anchor text-ocean-500 text-2xl mr-3"></i>
-                        <span class="font-bold text-xl text-white">Nabik Oceanics BD</span>
+    <!-- Mission News (Feni Flood) -->
+    <section id="news" class="py-24 bg-navy-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-navy-800 skew-x-12 translate-x-20 opacity-30"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal-left">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-2 py-1 bg-red-600 text-xs font-bold rounded uppercase">Mission Report</span>
+                        <span class="text-slate-400 text-sm">August 2024</span>
                     </div>
-                    <p class="mb-6 max-w-sm">Connecting Bangladesh to global trade routes with integrity and speed.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-ocean-600 transition"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-ocean-600 transition"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-ocean-600 transition"><i class="fa-brands fa-twitter"></i></a>
+                    <h2 class="text-4xl font-bold mb-6">Feni Flood Relief</h2>
+                    <p class="text-slate-300 text-lg mb-6">
+                        When traditional boats failed in shallow, debris-filled floodwaters, Nabik succeeded. We retrofitted our RV2 to deliver food and medicine to 150 isolated families.
+                    </p>
+                    <div class="flex gap-8 mb-8">
+                        <div>
+                            <div class="text-3xl font-bold text-ocean">200+</div>
+                            <div class="text-xs text-slate-400 uppercase">Packs Delivered</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-ocean">150</div>
+                            <div class="text-xs text-slate-400 uppercase">Families Aided</div>
+                        </div>
                     </div>
-                </div>
-                <div class="grid grid-cols-2 gap-8">
-                    <div>
-                        <h4 class="text-white font-bold mb-4">Contact</h4>
-                        <ul class="space-y-3 text-sm">
-                            <li class="flex items-start"><i class="fa-solid fa-location-dot mt-1 mr-2 text-ocean-500"></i> Agrabad C/A, Chittagong, Bangladesh</li>
-                            <li class="flex items-center"><i class="fa-solid fa-envelope mr-2 text-ocean-500"></i> info@nabikoceanics.bd</li>
-                            <li class="flex items-center"><i class="fa-solid fa-phone mr-2 text-ocean-500"></i> +880 1XXX XXXXXX</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold mb-4">Legal</h4>
-                        <ul class="space-y-2 text-sm">
-                            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
-                            <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
-                        </ul>
+                    <div class="flex flex-wrap gap-4 opacity-70">
+                        <span class="font-bold border-r border-slate-600 pr-4">Prothom Alo</span>
+                        <span class="font-bold border-r border-slate-600 pr-4">Daily Star</span>
+                        <span class="font-bold">Dhaka Tribune</span>
                     </div>
                 </div>
-            </div>
-            <div class="border-t border-slate-700 mt-12 pt-8 text-center text-sm">
-                <p>&copy; 2025 Nabik Oceanics BD. All rights reserved.</p>
+                <div class="reveal-right relative">
+                    <!-- CORRECTED: Local File -->
+                    <img src="flood-mission.jpg" class="rounded-xl shadow-2xl border border-white/10 opacity-80 hover:opacity-100 transition duration-500" alt="Flood Relief Operation">
+                </div>
             </div>
         </div>
-    </footer>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-navy-950 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <h2 class="text-3xl font-bold mb-8">Secure Your Waterways</h2>
+            <div class="bg-navy-900 p-8 rounded-3xl max-w-4xl mx-auto shadow-2xl border border-navy-800">
+                <form class="grid md:grid-cols-2 gap-6 text-left">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Name</label>
+                        <input type="text" class="w-full bg-navy-950 border border-navy-700 rounded-lg px-4 py-3 focus:outline-none focus:border-ocean transition text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Email</label>
+                        <input type="email" class="w-full bg-navy-950 border border-navy-700 rounded-lg px-4 py-3 focus:outline-none focus:border-ocean transition text-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Inquiry Type</label>
+                        <select class="w-full bg-navy-950 border border-navy-700 rounded-lg px-4 py-3 focus:outline-none focus:border-ocean transition text-white">
+                            <option>Purchase / Deployment</option>
+                            <option>Service Request</option>
+                            <option>Partnership</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2 text-center">
+                        <button class="px-10 py-4 bg-ocean text-white font-bold rounded-full hover:bg-sky-500 transition shadow-lg shadow-ocean/20 w-full md:w-auto">
+                            Submit Request
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="mt-16 pt-8 border-t border-navy-900 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
+                <div class="mb-4 md:mb-0">
+                    &copy; 2025 Nabik Oceanics BD. <br>Dhaka, Bangladesh.
+                </div>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-ocean transition"><i class="fa-brands fa-facebook text-xl"></i></a>
+                    <a href="#" class="hover:text-ocean transition"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                    <a href="#" class="hover:text-ocean transition"><i class="fa-brands fa-twitter text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll & Nav Animation Script -->
+    <script>
+        // Scroll Reveal Logic
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal, .reveal-left, .reveal-right");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        // Navbar Transition Logic
+        const nav = document.getElementById('navbar');
+        const navLogoText = document.getElementById('nav-logo-text');
+        const navLogoBg = document.getElementById('nav-logo-bg');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const navBtn = document.getElementById('nav-btn');
+        const mobileBtn = document.querySelector('.nav-link-mobile');
+
+        function updateNav() {
+            if (window.scrollY > 50) {
+                // Scrolled State
+                nav.classList.add('nav-scrolled', 'text-slate-800');
+                nav.classList.remove('nav-transparent', 'text-white', 'h-20');
+                nav.classList.add('h-16'); // Shrink height
+                
+                navLogoBg.classList.remove('bg-white/10', 'text-white');
+                navLogoBg.classList.add('bg-navy-900', 'text-white');
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('hover:text-ocean');
+                    link.classList.add('hover:text-navy-600');
+                });
+                
+                navBtn.classList.remove('bg-white', 'text-navy-900');
+                navBtn.classList.add('bg-navy-900', 'text-white');
+
+                if(mobileBtn) mobileBtn.classList.remove('text-white');
+                if(mobileBtn) mobileBtn.classList.add('text-navy-900');
+
+            } else {
+                // Top State
+                nav.classList.remove('nav-scrolled', 'text-slate-800', 'h-16');
+                nav.classList.add('nav-transparent', 'text-white', 'h-20');
+
+                navLogoBg.classList.add('bg-white/10', 'text-white');
+                navLogoBg.classList.remove('bg-navy-900');
+                
+                navLinks.forEach(link => {
+                    link.classList.add('hover:text-ocean');
+                    link.classList.remove('hover:text-navy-600');
+                });
+
+                navBtn.classList.add('bg-white', 'text-navy-900');
+                navBtn.classList.remove('bg-navy-900', 'text-white');
+
+                if(mobileBtn) mobileBtn.classList.add('text-white');
+                if(mobileBtn) mobileBtn.classList.remove('text-navy-900');
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("scroll", updateNav);
+        
+        // Trigger once on load
+        reveal();
+        updateNav();
+    </script>
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
 </body>
 </html>
