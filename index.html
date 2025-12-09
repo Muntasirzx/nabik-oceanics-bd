@@ -84,9 +84,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div class="flex justify-between items-center">
                 <div class="flex items-center gap-3">
-                    <div id="nav-logo-bg" class="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center text-white shadow-lg transition-colors duration-300">
-                        <i class="fa-solid fa-anchor text-xl"></i>
-                    </div>
+                    <!-- LOGO UPDATED HERE -->
+                    <!-- Note: Use %20 for spaces in URLs to be safe, or rename file to nabik-logo.jpg -->
+                    <img src="nabik-logo.jpg" alt="Nabik Logo" class="w-10 h-10 rounded-lg shadow-lg object-contain bg-white">
+                    
                     <div>
                         <span id="nav-logo-text" class="text-xl font-bold tracking-tight block leading-none transition-colors duration-300">NABIK</span>
                         <span class="text-[10px] font-bold text-ocean uppercase tracking-widest block">Technologies</span>
@@ -499,7 +500,7 @@
         // Navbar Transition Logic
         const nav = document.getElementById('navbar');
         const navLogoText = document.getElementById('nav-logo-text');
-        const navLogoBg = document.getElementById('nav-logo-bg');
+        // REMOVED: navLogoBg Logic (because image doesn't need bg change)
         const navLinks = document.querySelectorAll('.nav-link');
         const navBtn = document.getElementById('nav-btn');
         const mobileBtn = document.querySelector('.nav-link-mobile');
@@ -511,8 +512,7 @@
                 nav.classList.remove('nav-transparent', 'text-white', 'h-20');
                 nav.classList.add('h-16'); // Shrink height
                 
-                navLogoBg.classList.remove('bg-white/10', 'text-white');
-                navLogoBg.classList.add('bg-navy-900', 'text-white');
+                // REMOVED: navLogoBg Logic
                 
                 navLinks.forEach(link => {
                     link.classList.remove('hover:text-ocean');
@@ -530,8 +530,7 @@
                 nav.classList.remove('nav-scrolled', 'text-slate-800', 'h-16');
                 nav.classList.add('nav-transparent', 'text-white', 'h-20');
 
-                navLogoBg.classList.add('bg-white/10', 'text-white');
-                navLogoBg.classList.remove('bg-navy-900');
+                // REMOVED: navLogoBg Logic
                 
                 navLinks.forEach(link => {
                     link.classList.add('hover:text-ocean');
